@@ -1,6 +1,6 @@
-# adoption_hero
+# Adoption Hero
 
-A new Flutter project.
+Adoption Hero is a "dating" app that matches shelter animals up with prospective owners.
 
 ## Getting Started
 
