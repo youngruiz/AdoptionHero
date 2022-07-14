@@ -5,8 +5,6 @@ import 'screens/pets.dart';
 import 'screens/news.dart';
 import 'screens/add_pet.dart';
 
-import 'app.dart';
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 

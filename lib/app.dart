@@ -2,7 +2,7 @@ import 'package:adoption_hero/widgets/petUpload.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-import 'screens/db_test.dart';
+import 'widgets/db_test.dart';
 
 class DbTestApp extends StatelessWidget {
   const DbTestApp({Key? key}) : super(key: key);
