@@ -1,10 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
-import '../models/pet_entry_DTO.dart';
+import '../models/petEntryDTO.dart';
 
 class UploadButton extends StatelessWidget {
   UploadButton({Key? key}) : super(key: key);
