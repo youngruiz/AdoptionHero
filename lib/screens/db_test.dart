@@ -17,8 +17,8 @@ class DbTest extends StatelessWidget {
             itemBuilder: (context, index){
               var post = snapshot.data!.docs[index];
               return ListTile(
-                leading: Text(post['weight'].toString()),
-                title: const Text('Post Title')
+                leading: Text(post['name']),
+                title: Text(post['breed'])
               );
             }
           );

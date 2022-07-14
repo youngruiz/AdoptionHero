@@ -1,3 +1,4 @@
+import 'package:adoption_hero/widgets/petUpload.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -37,7 +38,8 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(widgetTitle)),
-      body: const DbTest()
+      body: const DbTest(),
+      floatingActionButton: UploadButton(),
     );
   }
 }
