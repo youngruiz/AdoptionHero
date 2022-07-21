@@ -7,6 +7,8 @@ import 'screens/pets.dart';
 import 'screens/news.dart';
 import 'screens/add_pet.dart';
 import 'screens/news_article.dart';
+import 'screens/login.dart';
+import 'screens/register.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,6 +24,8 @@ class MyApp extends StatelessWidget {
 
 
   static final routes = {
+        '/': (context) => const LoginWidget(),
+        '/register': (context) => const RegisterWidget(),
         News.routeName: (context) => News(),
         NewsArticle.routeName: (context) => NewsArticle(),
         Pets.routeName: (context) => Pets(),
@@ -30,7 +34,8 @@ class MyApp extends StatelessWidget {
 
 
   static const String _title = 'Flutter Code Sample';
-
+  initialRoute = '/';
+  
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -53,6 +58,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
+    LoginWidget(),
     Pets(),
     News(),
     AddPetTabBodyWidget(),
@@ -78,6 +84,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.login),
+            label: 'Login',
+            backgroundColor: Colors.grey[350],
+          ),
           BottomNavigationBarItem(
             icon: Icon(Icons.pets),
             label: 'Pets',
