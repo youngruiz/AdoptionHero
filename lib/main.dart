@@ -24,8 +24,8 @@ class MyApp extends StatelessWidget {
 
 
   static final routes = {
-        '/': (context) => const LoginWidget(),
-        '/register': (context) => const RegisterWidget(),
+        // '/': (context) => const LoginWidget(),
+        // '/register': (context) => const RegisterWidget(),
         News.routeName: (context) => News(),
         NewsArticle.routeName: (context) => NewsArticle(),
         Pets.routeName: (context) => Pets(),
@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
 
 
   static const String _title = 'Flutter Code Sample';
-  initialRoute = '/';
+  // initialRoute = '/';
   
   @override
   Widget build(BuildContext context) {
