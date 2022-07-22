@@ -6,14 +6,37 @@ class AddPetTabBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      constraints: BoxConstraints.expand(),
-      padding: const EdgeInsets.all(8.0),
-      color: Colors.green[50],
-      alignment: Alignment.center,
-      child: Text('Add Pet Page?',
-                style: Theme.of(context).textTheme.headline4!.copyWith(color: Colors.black)
-              ),
+    return Padding(
+      padding: const EdgeInsets.all(10),
+      child: 
+      Column(
+        children: [
+
+        const Padding(
+          padding: EdgeInsets.all(10),
+          child: TextField(
+            autofocus: true,
+            decoration: InputDecoration(
+              labelText: 'Pet Name'),
+        )),
+        
+        const Padding(
+          padding: EdgeInsets.all(10),
+          child: TextField(
+            keyboardType: TextInputType.multiline,
+            maxLines: null,
+            autofocus: true,
+            decoration: InputDecoration(
+              labelText: 'Description', 
+              //border: OutlineInputBorder(), 
+              contentPadding: EdgeInsets.symmetric(vertical: 20.0),),
+        )),
+
+        RaisedButton(
+          onPressed: () {},
+          child: Text('Save Entry')
+        )
+        ])
     );
   } 
 }
