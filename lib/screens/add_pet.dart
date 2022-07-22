@@ -20,6 +20,14 @@ class _AddPetTabBodyWidgetState extends State<AddPetTabBodyWidget> {
   File? image;
   final picker = ImagePicker();
 
+  String? name;
+  String? type;
+  String? breed;
+  String? disposition;
+  String? availability;
+  String? newsItem;
+  String? description;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -30,21 +38,13 @@ class _AddPetTabBodyWidgetState extends State<AddPetTabBodyWidget> {
         child: Column(
           children: [
       
-          Padding(
-            padding: const EdgeInsets.all(10),
-            child: textEntryField('Pet Name')),
-          
-          const Padding(
-            padding: EdgeInsets.all(10),
-            child: TextField(
-              keyboardType: TextInputType.multiline,
-              maxLines: null,
-              autofocus: true,
-              decoration: InputDecoration(
-                labelText: 'Description', 
-                //border: OutlineInputBorder(), 
-                contentPadding: EdgeInsets.symmetric(vertical: 20.0),),
-          )),
+            petNameField(),
+            petTypeField(),
+            petBreedField(),
+            petDispositionField(),
+            petAvailabilityField(),
+            petDescriptionField(),
+            petNewsItemField(),
       
           // RaisedButton(
           //   onPressed: () {},
@@ -55,14 +55,6 @@ class _AddPetTabBodyWidgetState extends State<AddPetTabBodyWidget> {
       )
     );
   }
-
-    Widget textEntryField(labelText){
-      return TextFormField(
-          autofocus: true,
-          decoration: InputDecoration(
-            labelText: labelText),
-      );
-    }
 
     Future getImage() async {
       final pickedFile = await picker.pickImage(source: ImageSource.gallery);
@@ -80,26 +72,189 @@ class _AddPetTabBodyWidgetState extends State<AddPetTabBodyWidget> {
     FirebaseFirestore.instance
       .collection('pets')
       .add({
-        'name': "Fido",
-        'type': "Dog",
-        'breed': "Retriever",
-        'disposition': "Chill",
-        'availability': "Available Now",
-        'description': "Chill AF",
+        'name': name,
+        'type': type,
+        'breed': breed,
+        'disposition': disposition,
+        'availability': availability,
+        'description': description,
         'userId': "userID1234567",
         'imgUrl': url,
         'liked': 0,
         'dateCreated': DateFormat.yMMMMEEEEd().format(DateTime.now()).toString(),
-        'newsItem': "NEWS"
+        'newsItem': newsItem
       });
   }
 
   Widget selectImageButton() {
     return FloatingActionButton(
       child: const Icon(Icons.add_a_photo),
-      onPressed: () {
-        uploadData();
+      onPressed: () async {
+        if(formKey.currentState!.validate()){
+          formKey.currentState!.save();
+          uploadData();
+        }
       },
+    );
+  }
+
+    Widget petNameField(){
+      return Padding(
+        padding: const EdgeInsets.all(5),
+        child: TextFormField(
+          autofocus: true,
+          decoration: const InputDecoration(
+            labelText: 'Pet Name'
+          ),
+          validator: (value) {
+            if(value!.isEmpty){
+              return 'Pet Name cannot be empty';
+            } else {
+              return null;
+            }
+          },
+          onSaved: (value) {
+            name = value;
+          }
+      )
+    );
+  }
+
+  Widget petTypeField(){
+    return Padding(
+      padding: const EdgeInsets.all(5),
+      child: TextFormField(
+        autofocus: true,
+        decoration: const InputDecoration(
+          labelText: 'Pet Type'
+        ),
+        validator: (value) {
+          if(value!.isEmpty){
+            return 'Pet Type cannot be empty';
+          } else {
+            return null;
+          }
+        },
+        onSaved: (value) {
+          type = value;
+        }
+      )
+    );
+  }
+
+  Widget petBreedField(){
+    return Padding(
+      padding: const EdgeInsets.all(5),
+      child: TextFormField(
+        autofocus: true,
+        decoration: const InputDecoration(
+          labelText: 'Pet Breed'
+        ),
+        validator: (value) {
+          if(value!.isEmpty){
+            return 'Pet Breed cannot be empty';
+          } else {
+            return null;
+          }
+        },
+        onSaved: (value) {
+          breed = value;
+        }
+      )
+    );
+  }
+
+  Widget petDispositionField(){
+    return Padding(
+      padding: const EdgeInsets.all(5),
+      child: TextFormField(
+        autofocus: true,
+        decoration: const InputDecoration(
+          labelText: 'Pet Disposition'
+        ),
+        validator: (value) {
+          if(value!.isEmpty){
+            return 'Pet Disposition cannot be empty';
+          } else {
+            return null;
+          }
+        },
+        onSaved: (value) {
+          disposition = value;
+        }
+      )
+    );
+  }
+
+  Widget petAvailabilityField(){
+    return Padding(
+      padding: const EdgeInsets.all(5),
+      child: TextFormField(
+        autofocus: true,
+        decoration: const InputDecoration(
+          labelText: 'Pet Availability'
+        ),
+        validator: (value) {
+          if(value!.isEmpty){
+            return 'Pet Availability cannot be empty';
+          } else {
+            return null;
+          }
+        },
+        onSaved: (value) {
+          availability = value;
+        }
+      )
+    );
+  }
+
+  Widget petDescriptionField(){
+    return Padding(
+      padding: const EdgeInsets.all(5),
+      child: TextFormField(
+        autofocus: true,
+        keyboardType: TextInputType.multiline,
+        maxLines: null,
+        decoration: const InputDecoration(
+          labelText: 'Pet Description',
+          contentPadding: EdgeInsets.symmetric(vertical: 20.0)
+        ),
+        validator: (value) {
+          if(value!.isEmpty){
+            return 'Pet Description cannot be empty';
+          } else {
+            return null;
+          }
+        },
+        onSaved: (value) {
+          description = value;
+        }
+      )
+    );
+  }
+
+    Widget petNewsItemField(){
+    return Padding(
+      padding: const EdgeInsets.all(5),
+      child: TextFormField(
+        autofocus: true,
+        keyboardType: TextInputType.multiline,
+        maxLines: null,
+        decoration: const InputDecoration(
+          labelText: 'Pet NewsItem',
+          contentPadding: EdgeInsets.symmetric(vertical: 20.0)
+        ),
+        validator: (value) {
+          if(value!.isEmpty){
+            return 'Pet NewsItem cannot be empty';
+          } else {
+            return null;
+          }
+        },
+        onSaved: (value) {
+          newsItem = value;
+        }
+      )
     );
   }
 }
