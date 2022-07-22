@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:adoption_hero/main.dart';
 import 'pet_view.dart';
@@ -16,25 +17,55 @@ class Pets extends StatelessWidget {
         };
     });
 
-    return GridView.builder(
-      padding: EdgeInsets.only(top: 5),
-      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: 200,
-                crossAxisSpacing: 10.0,
-                mainAxisSpacing: 10.0
-              ),
-      itemCount: pets.length, 
-      itemBuilder: (context, index) {
-
-        return Card(
-          color: Colors.teal[100],
-          child: InkResponse(
-            child: Text("${pets[index]['pet_name']}"),
-            onTap: () {pushPetView(context, index);},
-          )
-        );
+    return StreamBuilder(
+      stream: FirebaseFirestore.instance
+        .collection('pets')
+        .snapshots(),
+      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot){
+        if(snapshot.hasData && snapshot.data!.docs.isNotEmpty){
+          return GridView.builder(
+            padding: EdgeInsets.only(top: 5),
+            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                      maxCrossAxisExtent: 200,
+                      crossAxisSpacing: 10.0,
+                      mainAxisSpacing: 10.0
+                    ),
+            itemCount: snapshot.data!.docs.length, 
+            itemBuilder: (context, index) {
+              var post = snapshot.data!.docs[index];
+              return Card(
+                color: Colors.teal[100],
+                child: Column(
+                  children: [
+                    InkResponse(
+                      child: Text(post['name']),
+                      onTap: () {pushPetView(context, index);},
+                    ),
+                    InkResponse(
+                      child: Text(post['type'])
+                    ),
+                    InkResponse(
+                      child: Text(post['breed'])
+                    ),
+                    InkResponse(
+                      child: Text(post['disposition'])
+                    ),
+                    InkResponse(
+                      child: Text(post['availability'])
+                    ),
+                    InkResponse(
+                      child: Text(post['description'])
+                    ),
+                  ],
+                )
+              );
+            }
+          );
+        } else {
+          return const Center(child: CircularProgressIndicator());
+        }
       }
-    );
+      );
   } 
 }
 

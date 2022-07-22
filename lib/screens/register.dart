@@ -3,9 +3,9 @@ import 'package:adoption_hero/main.dart';
 import 'package:adoption_hero/screens/login.dart';
 
 class RegisterWidget extends StatelessWidget {
-  const RegisterWidget({Key? key}) : super(key: key);
-  //TextEditingController nameController = TextEditingController();
-  //TextEditingController passwordController = TextEditingController();
+  RegisterWidget({Key? key}) : super(key: key);
+  TextEditingController _emailField = TextEditingController();
+  TextEditingController _passwordField = TextEditingController();
 
   static const routeName = 'Register';
 
