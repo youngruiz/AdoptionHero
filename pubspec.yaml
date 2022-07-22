@@ -97,10 +97,13 @@ flutter:
     - family: Inter-Regular
       fonts:
         - asset: assets/fonts/Inter-Regular.ttf
-    - family: Inter
+    - family: Inter-Bold
       fonts:
-        - asset: assets/fonts/Inter-Black.ttf
         - asset: assets/fonts/Inter-Bold.ttf
+    - family: Tinos
+      fonts:
+        - asset: assets/fonts/Tinos-Regular.ttf
+    
           # - asset: assets/fonts/Inter-ExtraBold.ttf
           # - asset: assets/fonts/Inter-ExtraLight.ttf
           # - asset: assets/fonts/Inter-Light.ttf

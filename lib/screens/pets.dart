@@ -11,12 +11,6 @@ class Pets extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    final pets = List<Map>.generate(40, (i) {
-        return {
-          'pet_name': 'Pet name $i'
-        };
-    });
-
     return StreamBuilder(
       stream: FirebaseFirestore.instance
         .collection('pets')
@@ -31,33 +25,25 @@ class Pets extends StatelessWidget {
                       mainAxisSpacing: 10.0
                     ),
             itemCount: snapshot.data!.docs.length, 
+        
             itemBuilder: (context, index) {
               var post = snapshot.data!.docs[index];
+
+              var petData = new Map();
+              petData['name'] = post['name'];
+              petData['availability'] = post['availability'];
+              petData['breed'] = post['breed'];
+              petData['type'] = post['type'];
+              petData['description'] = post['description'];
+              petData['imgUrl'] = post['imgUrl'];
+
+              
               return Card(
                 color: Colors.teal[100],
-                child: Column(
-                  children: [
-                    InkResponse(
-                      child: Text(post['name']),
-                      onTap: () {pushPetView(context, index);},
-                    ),
-                    InkResponse(
-                      child: Text(post['type'])
-                    ),
-                    InkResponse(
-                      child: Text(post['breed'])
-                    ),
-                    InkResponse(
-                      child: Text(post['disposition'])
-                    ),
-                    InkResponse(
-                      child: Text(post['availability'])
-                    ),
-                    InkResponse(
-                      child: Text(post['description'])
-                    ),
-                  ],
-                )
+                child: InkResponse(
+                  child: Text(post['name']),
+                  onTap: () {pushPetView(context, petData);},
+                ),  
               );
             }
           );
@@ -69,6 +55,6 @@ class Pets extends StatelessWidget {
   } 
 }
 
-void pushPetView(BuildContext context, index) {
-  Navigator.of(context).pushNamed(PetView.routeName, arguments: index);
+void pushPetView(BuildContext context, petData) {
+  Navigator.of(context).pushNamed(PetView.routeName, arguments: petData);
 }

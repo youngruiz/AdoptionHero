@@ -7,9 +7,16 @@ class PetView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
 
-    final int receivedValue = ModalRoute.of(context)?.settings.arguments as int;
-    print(receivedValue);
+    Map petData = ModalRoute.of(context)?.settings.arguments as Map;
+    String petName = petData['name'];
+    String petBreed = petData['breed'];
+    String petType = petData['type'];
+    String petAvail = petData['availability'];
+    String petDescription = petData['description'];
+    String petImgUrl = petData['imgUrl'];
+
 
     return Scaffold(
       backgroundColor: Colors.teal[100],
@@ -43,68 +50,70 @@ class PetView extends StatelessWidget {
                 padding: EdgeInsets.all(10), 
                 child: Container(
                   height: 350, width: double.infinity, 
-                  child: Image.asset('assets/images/some_pet.jpg'))
+                  child: Image.network(petImgUrl))
                 ),
 
                 Padding(
                   padding: EdgeInsets.all(10), 
                   child: Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.blueAccent)
-                    ),
+                    // decoration: BoxDecoration(
+                    //   border: Border.all(color: Colors.blueAccent)
+                    // ),
                     width: double.infinity, 
-                    child: Text("Pet Name"))
+                    child: Text("$petName", style: TextStyle(fontSize: 48, fontFamily: 'Inter-Bold'),))
                 ),
 
-                Padding(
-                  padding: EdgeInsets.all(10), 
-                  child: Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.blueAccent)
-                    ),
-                    width: double.infinity, 
-                    child: Text("Pet Description"))
-                ),
 
 
                 Padding(
                   padding: EdgeInsets.all(10), 
                   child: Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.blueAccent)
-                    ),
+                    // decoration: BoxDecoration(
+                    //   border: Border.all(color: Colors.blueAccent)
+                    // ),
                     width: double.infinity, 
-                    child: Text("TYPE:                    $receivedValue"))
+                    child: Text("TYPE:               $petType", style: TextStyle(fontSize: 24, fontFamily: 'Tinos')))
                 ),
 
                 Padding(
                   padding: EdgeInsets.all(10), 
                   child: Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.blueAccent)
-                    ),
+                    // decoration: BoxDecoration(
+                    //   border: Border.all(color: Colors.blueAccent)
+                    // ),
                     width: double.infinity, 
-                    child: Text("BREED:                  $receivedValue"))
+                    child: Text("BREED:            $petBreed", style: TextStyle(fontSize: 24, fontFamily: 'Tinos')))
                 ),
 
                 Padding(
                   padding: EdgeInsets.all(10), 
                   child: Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.blueAccent)
-                    ),
+                    // decoration: BoxDecoration(
+                    //   border: Border.all(color: Colors.blueAccent)
+                    // ),
                     width: double.infinity, 
-                    child: Text("AVAIL.:                   $receivedValue"))
+                    child: Text("AVAIL.:             $petAvail", style: TextStyle(fontSize: 24, fontFamily: 'Tinos')))
                 ),
 
                 Padding(
                   padding: EdgeInsets.all(10), 
                   child: Container(
+                    // decoration: BoxDecoration(
+                    //   border: Border.all(color: Colors.blueAccent)
+                    // ),
+                    width: double.infinity, 
+                    child: Text("DESCRIPTION:", style: TextStyle(fontSize: 24, fontFamily: 'Tinos')))
+                ),
+
+                Padding(
+                  padding: EdgeInsets.all(10),
+                   
+                  child: Container(
                     decoration: BoxDecoration(
-                      border: Border.all(color: Colors.blueAccent)
+                      border: Border.all(color: Colors.black, width: 0.5)
                     ),
                     width: double.infinity, 
-                    child: Text("DESCRIPTION:      $receivedValue"))
+                    child: Padding(padding: EdgeInsets.all(10), child: Text("$petDescription", style: TextStyle(fontSize: 20, fontFamily: 'Tinos'))))
                 ),
 
 
