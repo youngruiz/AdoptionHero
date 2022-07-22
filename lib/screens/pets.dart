@@ -41,7 +41,16 @@ class Pets extends StatelessWidget {
               return Card(
                 color: Colors.teal[100],
                 child: InkResponse(
-                  child: Text(post['name']),
+                  child: Stack(children: <Widget>[
+                      Image.network(petData['imgUrl']),
+                      Container(
+                        alignment: Alignment.bottomLeft, 
+                        child: Padding(
+                          padding: EdgeInsets.all(10), 
+                          child: Text(petData['name'], style: TextStyle(color: Colors.white,fontSize: 24, fontFamily: 'Inter-Bold')))),
+                    ],),
+                  
+                  
                   onTap: () {pushPetView(context, petData);},
                 ),  
               );

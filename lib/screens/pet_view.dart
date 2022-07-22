@@ -19,7 +19,7 @@ class PetView extends StatelessWidget {
 
 
     return Scaffold(
-      backgroundColor: Colors.teal[100],
+      backgroundColor: Colors.green[50],
       appBar: AppBar(
         
         title: const Icon(Icons.pets_rounded),
