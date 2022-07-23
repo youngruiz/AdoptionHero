@@ -25,10 +25,9 @@ class Pets extends StatelessWidget {
                       mainAxisSpacing: 10.0
                     ),
             itemCount: snapshot.data!.docs.length, 
-        
             itemBuilder: (context, index) {
-              var post = snapshot.data!.docs[index];
 
+              var post = snapshot.data!.docs[index];
               var petData = new Map();
               petData['name'] = post['name'];
               petData['availability'] = post['availability'];

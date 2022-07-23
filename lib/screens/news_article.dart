@@ -8,6 +8,12 @@ class NewsArticle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+    Map newsData = ModalRoute.of(context)?.settings.arguments as Map;
+    String newsTitle = newsData['title'];
+    String newsArticleBody = newsData['articleBody'];
+    String newsImgUrl = newsData['imgUrl'];
+    String newsAuthor = newsData['author'];
+
     return Scaffold(
       backgroundColor: Colors.green[50],
       appBar: AppBar(
@@ -21,35 +27,41 @@ class NewsArticle extends StatelessWidget {
       body: 
         SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             child: Column(
               children: <Widget>[
 
                 Padding(
-                padding: EdgeInsets.all(10), 
-                child: Container(
+                padding: const EdgeInsets.all(10), 
+                child: SizedBox(
                   height: 350, width: double.infinity, 
-                  child: Image.asset('assets/images/some_news.jpg'))
+                  child: Image.network(newsImgUrl))
                 ),
 
                 Padding(
-                  padding: EdgeInsets.all(10), 
-                  child: Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.blueAccent)
-                    ),
+                  padding: const EdgeInsets.all(10), 
+                  child: SizedBox(
                     width: double.infinity, 
-                    child: Text("Article Title"))
+                    child: Text(newsTitle, style: const TextStyle(fontSize: 36, fontFamily: 'Inter-Bold')))
                 ),
 
+
+                const Padding(padding: EdgeInsets.only(left: 10, right: 10), child: Divider(color: Colors.black)),
+
                 Padding(
-                  padding: EdgeInsets.all(10), 
-                  child: Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.blueAccent)
-                    ),
+                  padding: const EdgeInsets.all(10), 
+                  child: SizedBox(
                     width: double.infinity, 
-                    child: Text("Article Words"))
+                    child: Text("By $newsAuthor", style: const TextStyle(fontSize: 18, fontFamily: 'Tinos')))
+                ),
+
+                const Padding(padding: EdgeInsets.only(left: 10, right: 10), child: Divider(color: Colors.black)),
+
+                Padding(
+                  padding: const EdgeInsets.all(10), 
+                  child: SizedBox(
+                    width: double.infinity, 
+                    child: Text(newsArticleBody, style: const TextStyle(fontSize: 22, fontFamily: 'Tinos')))
                 ),
 
                 ],
@@ -57,16 +69,6 @@ class NewsArticle extends StatelessWidget {
       
     );
   
-    // return Center(
-    //   child: Column(
-    //     mainAxisAlignment: MainAxisAlignment.center,
-    //     children: [
-    //       textPlaceHolder(context),
-    //       backToNewsButton(context),
-    //     ],
-    //   )
-    // );
-
   }
 
 }
