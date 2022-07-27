@@ -1,9 +1,14 @@
+
+import 'package:adoption_hero/screens/pet_view.dart';
 import 'package:adoption_hero/screens/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'screens/pets.dart';
 import 'screens/news.dart';
 import 'screens/add_pet.dart';
+import 'screens/news_article.dart';
+import 'screens/login.dart';
+import 'screens/register.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,13 +21,27 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  static const String _title = 'Flutter Code Sample';
 
+
+  static final routes = {
+        // '/': (context) => const LoginWidget(),
+        // '/register': (context) => const RegisterWidget(),
+        News.routeName: (context) => News(),
+        NewsArticle.routeName: (context) => NewsArticle(),
+        Pets.routeName: (context) => Pets(),
+        PetView.routeName: (context) => PetView(),
+        };
+
+
+  static const String _title = 'Flutter Code Sample';
+  // initialRoute = '/';
+  
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: _title,
       home: MyStatefulWidget(),
+      routes: routes,
     );
   }
 }
@@ -39,8 +58,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
-    PetsTabBodyWidget(),
-    NewsTabBodyWidget(),
+    LoginWidget(),
+    Pets(),
+    News(),
     AddPetTabBodyWidget(),
     ProfileTabBodyWidget(),
   ];
@@ -64,6 +84,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.login),
+            label: 'Login',
+            backgroundColor: Colors.grey[350],
+          ),
           BottomNavigationBarItem(
             icon: Icon(Icons.pets),
             label: 'Pets',

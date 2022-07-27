@@ -10,10 +10,42 @@ class ProfileTabBodyWidget extends StatelessWidget {
       constraints: BoxConstraints.expand(),
       padding: const EdgeInsets.all(8.0),
       color: Colors.green[50],
-      alignment: Alignment.center,
-      child: Text('Profile Page?',
-                style: Theme.of(context).textTheme.headline4!.copyWith(color: Colors.black)
-              ),
+      alignment: Alignment.topCenter,
+      child: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.all(10),
+            child: Column(
+              children: <Widget>[
+
+                Padding(
+                padding: EdgeInsets.all(10), 
+                child: Container(
+                  height: 350, width: double.infinity, 
+                  child: Image.asset('assets/images/clown.jpg'))
+                ),
+
+                Padding(
+                  padding: EdgeInsets.all(10), 
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.blueAccent)
+                    ),
+                    width: double.infinity, 
+                    child: Text("USER INFO"))
+                ),
+
+                Padding(
+                  padding: EdgeInsets.all(10), 
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.blueAccent)
+                    ),
+                    width: double.infinity, 
+                    child: Text("USER INFO"))
+                ),
+
+                ],
+            ),)), 
     );
   } 
 }
