@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:adoption_hero/main.dart';
 
 class ProfileTabBodyWidget extends StatelessWidget {
   const ProfileTabBodyWidget({Key? key}) : super(key: key);
