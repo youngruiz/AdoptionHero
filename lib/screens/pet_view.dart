@@ -16,6 +16,8 @@ class PetView extends StatelessWidget {
     String petAvail = petData['availability'];
     String petDescription = petData['description'];
     String petImgUrl = petData['imgUrl'];
+    var petDispositions = petData['dispositions'];
+    print(petDispositions.runtimeType);
 
 
     return Scaffold(
@@ -116,6 +118,35 @@ class PetView extends StatelessWidget {
                     child: Padding(padding: EdgeInsets.all(10), child: Text("$petDescription", style: TextStyle(fontSize: 20, fontFamily: 'Tinos'))))
                 ),
 
+                Padding(
+                  padding: EdgeInsets.all(10), 
+                  child: Container(
+                    // decoration: BoxDecoration(
+                    //   border: Border.all(color: Colors.blueAccent)
+                    // ),
+                    width: double.infinity, 
+                    child: Text("DESPOSITIONS:", style: TextStyle(fontSize: 24, fontFamily: 'Tinos')))
+                ),
+
+                Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Wrap(
+                    direction: Axis.horizontal,
+                    children: [for (var i in petDispositions) 
+                      Padding(
+                        padding: EdgeInsets.all(5),
+                        child: 
+                          Container(
+                            padding: EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                      border: Border.all(color: Colors.black, width: 0.5), borderRadius: BorderRadius.circular(20),
+                    ),
+                            child: Text(i.toString(), style: TextStyle(fontSize: 15, fontFamily: 'Tinos'))
+                          )
+                      ) 
+                    ],
+                  ) ,
+                ),
 
 
 

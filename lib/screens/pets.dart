@@ -5,7 +5,7 @@ import 'pet_view.dart';
 
 class Pets extends StatelessWidget {
   const Pets({Key? key}) : super(key: key);
-  
+
   static const routeName = 'pets';
 
   @override
@@ -35,7 +35,7 @@ class Pets extends StatelessWidget {
               petData['type'] = post['type'];
               petData['description'] = post['description'];
               petData['imgUrl'] = post['imgUrl'];
-
+              petData['dispositions'] = post['dispositions'];
               
               return Card(
                 color: Colors.teal[100],
