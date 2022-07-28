@@ -3,6 +3,10 @@ import 'package:adoption_hero/screens/news.dart';
 import 'package:adoption_hero/screens/pets.dart';
 import 'package:adoption_hero/screens/profile.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:adoption_hero/main.dart';
+
+import '../app.dart';
 
 class NavigatorScaffold extends StatefulWidget {
   const NavigatorScaffold({Key? key}) : super(key: key);
@@ -33,6 +37,15 @@ class _NavigatorScaffoldState extends State<NavigatorScaffold> {
     return Scaffold(
       backgroundColor: Colors.green[50],
       appBar: AppBar(
+        leading: IconButton(
+             icon: const Icon(
+               Icons.logout,
+               color: Colors.grey,
+             ),
+             onPressed: () {
+               _signOut();
+               runApp(const MyApp());
+             }),
         title: const Icon(Icons.pets_rounded),
         backgroundColor: Colors.green[100],
       ),
@@ -73,4 +86,9 @@ class _NavigatorScaffoldState extends State<NavigatorScaffold> {
       ),
     );
   }
+}
+
+Future<void> _signOut() async {
+  await FirebaseAuth.instance.signOut();
+  print("logged out");
 }
