@@ -1,4 +1,5 @@
 import 'package:adoption_hero/screens/add_pet.dart';
+import 'package:adoption_hero/screens/login.dart';
 import 'package:adoption_hero/screens/news.dart';
 import 'package:adoption_hero/screens/pets.dart';
 import 'package:adoption_hero/screens/profile.dart';
@@ -44,7 +45,7 @@ class _NavigatorScaffoldState extends State<NavigatorScaffold> {
              ),
              onPressed: () {
                _signOut();
-               runApp(const MyApp());
+               Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const LoginWidget()));
              }),
         title: const Icon(Icons.pets_rounded),
         backgroundColor: Colors.green[100],

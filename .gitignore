@@ -6,3 +6,4 @@
 .packages
 build
 build/
+ios/Podfile.lock

@@ -35,7 +35,7 @@ class Pets extends StatelessWidget {
               petData['type'] = post['type'];
               petData['description'] = post['description'];
               petData['imgUrl'] = post['imgUrl'];
-              petData['dispositions'] = post['dispositions'];
+              //petData['dispositions'] = post['dispositions'];
               
               return Card(
                 color: Colors.teal[100],
