@@ -45,12 +45,7 @@ class _AddPetTabBodyWidgetState extends State<AddPetTabBodyWidget> {
             petAvailabilityField(),
             petDescriptionField(),
             petNewsItemField(),
-      
-          // RaisedButton(
-          //   onPressed: () {},
-          //   child: Text('Choose Photo and Save Entry')
-          // )
-          selectImageButton()
+            selectImageButton()
           ]),
       )
     );

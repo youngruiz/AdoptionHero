@@ -1,3 +1,4 @@
+import 'package:adoption_hero/screens/add_user.dart';
 import 'package:adoption_hero/screens/navigator_scaffold.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -85,7 +86,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                     onPressed: () async {
                       bool shouldNavigate = await register();
                       if(shouldNavigate){
-                        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const NavigatorScaffold()));
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const AddUser()));
                       }
                     },
                   )
