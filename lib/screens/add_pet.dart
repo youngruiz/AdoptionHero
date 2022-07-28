@@ -87,8 +87,8 @@ class _AddPetTabBodyWidgetState extends State<AddPetTabBodyWidget> {
   }
 
   Widget selectImageButton() {
-    return FloatingActionButton(
-      child: const Icon(Icons.add_a_photo),
+    return ElevatedButton(
+      child: const Text("Choose photo and upload data"),
       onPressed: () async {
         if(formKey.currentState!.validate()){
           formKey.currentState!.save();
