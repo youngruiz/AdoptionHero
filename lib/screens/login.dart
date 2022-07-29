@@ -15,16 +15,7 @@ class _LoginWidgetState extends State<LoginWidget> {
   final formKey = GlobalKey<FormState>();
   final TextEditingController _emailField = TextEditingController();
   final TextEditingController _passwordField = TextEditingController();
-
-
-  @override
-  void dispose(){
-    _emailField.dispose();
-    _passwordField.dispose();
-
-    super.dispose();
-  }
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(backgroundColor: Colors.green[50],

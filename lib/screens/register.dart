@@ -21,14 +21,6 @@ class _RegisterWidgetState extends State<RegisterWidget> {
   final TextEditingController _passwordField = TextEditingController();
 
   @override
-  void dispose(){
-    _emailField.dispose();
-    _passwordField.dispose();
-
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(backgroundColor: Colors.green[50],
       appBar: AppBar(

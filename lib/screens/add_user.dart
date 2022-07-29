@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:adoption_hero/screens/navigator_scaffold.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:adoption_hero/main.dart';
@@ -19,7 +20,9 @@ class AddUser extends StatefulWidget {
 
 class _AddUserState extends State<AddUser> {
   
+  final user = FirebaseAuth.instance.currentUser!;
   final formKey = GlobalKey<FormState>();
+  String dropdownValue = "User";
   File? image;
   final picker = ImagePicker();
 
@@ -42,7 +45,8 @@ class _AddUserState extends State<AddUser> {
           child: Column(
             children: [
               userNameField(),
-              selectImageButton()
+              accountTypeDropdown(),
+              selectImageButton(),
             ]),
         )
       ),
@@ -66,8 +70,8 @@ class _AddUserState extends State<AddUser> {
       .collection('users')
       .add({
         'name': name,
-        'email': "example@example.com",
-        'userId': "userID1234567",
+        'email': user.email!,
+        'userType': userType,
         'imgUrl': url,
         'dateCreated': DateFormat.yMMMMEEEEd().format(DateTime.now()).toString(),
       });
@@ -105,6 +109,33 @@ class _AddUserState extends State<AddUser> {
           name = value;
         }
       )
+    );
+  }
+
+  Widget accountTypeDropdown() {
+    return DropdownButtonFormField (
+      style: const TextStyle(color: Colors.black),
+      value: "User",
+      icon: const Icon(Icons.arrow_downward),
+      decoration: const InputDecoration(
+          labelText: "Account Type",
+          border: OutlineInputBorder()
+      ),
+      items: <String>["Admin", "User"]
+      .map<DropdownMenuItem<String>>((String value) {
+        return DropdownMenuItem<String>(
+          value: value,
+          child: Text(value)
+        );
+      }).toList(), 
+      onChanged: (value) {
+        setState((){
+          dropdownValue = value.toString();
+        });
+      },
+      onSaved: (value) {
+        userType = value.toString();
+      },
     );
   }
 }
