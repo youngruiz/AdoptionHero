@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:adoption_hero/screens/login.dart';
 import 'package:intl/intl.dart';
 
+import '../widgets/error_alert.dart';
+
 
 
 class RegisterWidget extends StatefulWidget {
@@ -92,20 +94,21 @@ class _RegisterWidgetState extends State<RegisterWidget> {
   Future<bool> register() async {
     try{
       await FirebaseAuth.instance
-      .createUserWithEmailAndPassword(email: _emailField.text.trim(), password: _passwordField.text.trim());
-      print("Registered");
+        .createUserWithEmailAndPassword(email: _emailField.text.trim(), password: _passwordField.text.trim())
+        .catchError((e){
+          print(e.toString());
+          showDialog(
+            context: context,
+            builder: (BuildContext context){
+              return errorAlertDialog(context, 'Error', e.toString());
+            }
+          );
+        });
       return true;
-    } on FirebaseAuthException catch (e) {
-      if(e.code == 'weak-password'){
-        print('The password provided is too weak.');
-      } else if (e.code == 'email-already-in-use'){
-        print('The account already exists for that email.');
-      }
-      return false;
-    } catch (e) {
+    } catch(e){
       print(e.toString());
+      return false;
     }
-    return false;
   }
 
   Widget emailField(){
