@@ -1,4 +1,5 @@
 import 'package:adoption_hero/screens/navigator_scaffold.dart';
+import 'package:adoption_hero/widgets/error_alert.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:adoption_hero/screens/register.dart';
@@ -91,20 +92,20 @@ class _LoginWidgetState extends State<LoginWidget> {
   Future<bool> signIn() async {
     try{
       await FirebaseAuth.instance
-      .signInWithEmailAndPassword(email: _emailField.text.trim(), password: _passwordField.text.trim());
-      print("logged in");
+        .signInWithEmailAndPassword(email: _emailField.text.trim(), password: _passwordField.text.trim())
+        .catchError((e){
+          showDialog(
+            context: context,
+            builder: (BuildContext context){
+              return errorAlertDialog(context, 'Error', e.toString());
+            }
+          );
+        });
       return true;
-    } on FirebaseAuthException catch (e) {
-      if(e.code == 'weak-password'){
-        print('The password provided is too weak.');
-      } else if (e.code == 'email-already-in-use'){
-        print('The account already exists for that email.');
-      }
-      return false;
-    } catch (e) {
+    } catch(e){
       print(e.toString());
+      return false;
     }
-    return false;
   }
 
   Widget emailField(){
