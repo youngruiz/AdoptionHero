@@ -1,9 +1,11 @@
 import 'package:adoption_hero/screens/add_user.dart';
 import 'package:adoption_hero/screens/navigator_scaffold.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:adoption_hero/screens/login.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 
 
 
@@ -19,6 +21,11 @@ class _RegisterWidgetState extends State<RegisterWidget> {
   final formKey = GlobalKey<FormState>();
   final TextEditingController _emailField = TextEditingController();
   final TextEditingController _passwordField = TextEditingController();
+
+  String dropdownValue = "User";
+  String? name;
+  String? email;
+  String? userType;
 
   @override
   Widget build(BuildContext context) {
@@ -57,11 +64,19 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                   child: emailField(),
                 ),
                 Container(
-                  padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+                  padding: const EdgeInsets.all(10),
                   child: passwordField(),
                 ),
                 Container(
-                  height: 40,
+                  padding: const EdgeInsets.all(10),
+                  child: userNameField(),
+                ),
+                Container(
+                  padding: const EdgeInsets.all(10),
+                  child: accountTypeDropdown(),
+                ),
+                Container(
+                  height: 30,
                 ),
                 Container(
                   height: 50,
@@ -98,6 +113,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
   Widget emailField(){
     return TextFormField(
       controller: _emailField,
+      autofocus: true,
       decoration: const InputDecoration(
         border: OutlineInputBorder(),
         labelText: 'Email Address',
@@ -130,19 +146,77 @@ class _RegisterWidgetState extends State<RegisterWidget> {
     );
   }
 
+  Widget userNameField(){
+    return TextFormField(
+      decoration: const InputDecoration(
+        border: OutlineInputBorder(),
+        labelText: 'Name'
+      ),
+      validator: (value) {
+        if(value!.isEmpty){
+          return 'Name cannot be empty';
+        } else {
+          return null;
+        }
+      },
+      onSaved: (value) {
+        name = value;
+      }
+    );
+  }
+
+  Widget accountTypeDropdown() {
+    return DropdownButtonFormField (
+      style: const TextStyle(color: Colors.black),
+      value: "User",
+      icon: const Icon(Icons.arrow_downward),
+      decoration: const InputDecoration(
+          labelText: "Account Type",
+          border: OutlineInputBorder()
+      ),
+      items: <String>["Admin", "User"]
+      .map<DropdownMenuItem<String>>((String value) {
+        return DropdownMenuItem<String>(
+          value: value,
+          child: Text(value.toString())
+        );
+      }).toList(), 
+      onChanged: (value) {
+        setState((){
+          dropdownValue = value.toString();
+        });
+      },
+      onSaved: (value) {
+        userType = value.toString();
+      },
+    );
+  }
+
   Widget registerButton(){
     return ElevatedButton(
       child: const Text('Register'),
       onPressed: () async {
         if(formKey.currentState!.validate()){
           formKey.currentState!.save();
+          uploadData();
           bool shouldNavigate = await register();
           if(shouldNavigate){
-            Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const AddUser()));
+            Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const NavigatorScaffold()));
           }
         }
       },
     );
+  }
+  
+  void uploadData() async {
+    FirebaseFirestore.instance
+      .collection('users')
+      .add({
+        'name': name,
+        'email': _emailField.text.trim(),
+        'userType': userType,
+        'dateCreated': DateFormat.yMMMMEEEEd().format(DateTime.now()).toString(),
+      });
   }
 
   Widget signInLink(){

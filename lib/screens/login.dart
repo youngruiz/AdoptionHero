@@ -110,6 +110,7 @@ class _LoginWidgetState extends State<LoginWidget> {
   Widget emailField(){
     return TextFormField(
       controller: _emailField,
+      autofocus: true,
       decoration: const InputDecoration(
         border: OutlineInputBorder(),
         labelText: 'Email Address',
