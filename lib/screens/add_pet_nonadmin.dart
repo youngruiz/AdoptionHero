@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class AddPetNonAdmin extends StatelessWidget {
-  const AddPetNonAdmin
-({Key? key}) : super(key: key);
+  const AddPetNonAdmin({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const Center(child: Text("Only admins may add new pets."));
+    return Column(
+      children: [
+        const Text("Only admins may add new pets."),
+        SizedBox(
+          height: 350, width: double.infinity, 
+          child: Image.asset('assets/images/clown.jpg'))
+      ],
+    );
   }
 }
