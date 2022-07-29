@@ -1,4 +1,5 @@
 import 'package:adoption_hero/screens/add_pet.dart';
+import 'package:adoption_hero/screens/add_pet_nonadmin.dart';
 import 'package:adoption_hero/screens/login.dart';
 import 'package:adoption_hero/screens/news.dart';
 import 'package:adoption_hero/screens/pets.dart';
@@ -31,6 +32,7 @@ class _NavigatorScaffoldState extends State<NavigatorScaffold> {
   static const List<Widget> _widgetOptionsUser = <Widget>[
     Pets(),
     News(),
+    AddPetNonAdmin(),
     ProfileTabBodyWidget(),
   ];
 
@@ -48,15 +50,7 @@ class _NavigatorScaffoldState extends State<NavigatorScaffold> {
         if(!snapshot.hasData){
           return const Center(child: CircularProgressIndicator());
         } else {
-          snapshot.data!;
-          print(snapshot.data!.docs.first['userType']);
-          if(snapshot.data!.docs.first['userType'] == "Admin"){
-            print("Admin user");
-            var _widgetOptions = _widgetOptionsAdmin;
-          } else {
-            print("User user");
-            var _widgetOptions = _widgetOptionsUser;
-          }
+          var _widgetOptions = (snapshot.data!.docs.first['userType'] == "Admin") ? _widgetOptionsAdmin : _widgetOptionsUser;
           return Scaffold(
             backgroundColor: Colors.green[50],
             appBar: AppBar(

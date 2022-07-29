@@ -46,7 +46,7 @@ class _AddUserState extends State<AddUser> {
             children: [
               userNameField(),
               accountTypeDropdown(),
-              selectImageButton(),
+              uploadButton(),
             ]),
         )
       ),
@@ -65,14 +65,14 @@ class _AddUserState extends State<AddUser> {
     }
 
    void uploadData() async {
-    final url = await getImage();
+    // final url = await getImage();
     FirebaseFirestore.instance
       .collection('users')
       .add({
         'name': name,
         'email': user.email!,
         'userType': userType,
-        'imgUrl': url,
+        // 'imgUrl': url,
         'dateCreated': DateFormat.yMMMMEEEEd().format(DateTime.now()).toString(),
       });
   }
@@ -80,6 +80,19 @@ class _AddUserState extends State<AddUser> {
   Widget selectImageButton() {
     return ElevatedButton(
       child: const Text("Choose photo and create account"),
+      onPressed: () async {
+        if(formKey.currentState!.validate()){
+          formKey.currentState!.save();
+          uploadData();
+          Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const NavigatorScaffold()));
+        }
+      },
+    );
+  }
+
+   Widget uploadButton() {
+    return ElevatedButton(
+      child: const Text("Create account"),
       onPressed: () async {
         if(formKey.currentState!.validate()){
           formKey.currentState!.save();
@@ -125,7 +138,7 @@ class _AddUserState extends State<AddUser> {
       .map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,
-          child: Text(value)
+          child: Text(value.toString())
         );
       }).toList(), 
       onChanged: (value) {
