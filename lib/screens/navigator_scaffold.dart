@@ -21,17 +21,16 @@ class _NavigatorScaffoldState extends State<NavigatorScaffold> {
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget> _widgetOptions1 = <Widget>[
+  static const List<Widget> _widgetOptionsAdmin = <Widget>[
     Pets(),
     News(),
     AddPetTabBodyWidget(),
     ProfileTabBodyWidget(),
   ];
 
-  static const List<Widget> _widgetOptions2 = <Widget>[
+  static const List<Widget> _widgetOptionsUser = <Widget>[
     Pets(),
     News(),
-    AddPetTabBodyWidget(),
     ProfileTabBodyWidget(),
   ];
 
@@ -50,9 +49,13 @@ class _NavigatorScaffoldState extends State<NavigatorScaffold> {
           return const Center(child: CircularProgressIndicator());
         } else {
           snapshot.data!;
-          var _widgetOptions = _widgetOptions1;
-          if(snapshot.data!.docs.isNotEmpty && snapshot.data!.docs[0]['userType'] == "Admin"){
-            _widgetOptions = _widgetOptions2;
+          print(snapshot.data!.docs.first['userType']);
+          if(snapshot.data!.docs.first['userType'] == "Admin"){
+            print("Admin user");
+            var _widgetOptions = _widgetOptionsAdmin;
+          } else {
+            print("User user");
+            var _widgetOptions = _widgetOptionsUser;
           }
           return Scaffold(
             backgroundColor: Colors.green[50],
@@ -112,7 +115,8 @@ Future<void> _signOut() async {
 }
 
 Future<QuerySnapshot> getUser() async {
-  String userEmail = FirebaseAuth.instance.currentUser!.toString().trim();
+  String userEmail = FirebaseAuth.instance.currentUser!.email.toString().trim();
+  print(userEmail);
   return await FirebaseFirestore.instance
             .collection("users")
             .where('email', isEqualTo: userEmail)
