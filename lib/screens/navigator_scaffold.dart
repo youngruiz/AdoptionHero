@@ -32,7 +32,6 @@ class _NavigatorScaffoldState extends State<NavigatorScaffold> {
   static const List<Widget> _widgetOptionsUser = <Widget>[
     Pets(),
     News(),
-    AddPetNonAdmin(),
     ProfileTabBodyWidget(),
   ];
 
@@ -51,6 +50,7 @@ class _NavigatorScaffoldState extends State<NavigatorScaffold> {
           return const Center(child: CircularProgressIndicator());
         } else {
           var _widgetOptions = (snapshot.data!.docs.first['userType'] == "Admin") ? _widgetOptionsAdmin : _widgetOptionsUser;
+          if (_widgetOptions == _widgetOptionsAdmin){ 
           return Scaffold(
             backgroundColor: Colors.green[50],
             appBar: AppBar(
@@ -97,6 +97,51 @@ class _NavigatorScaffoldState extends State<NavigatorScaffold> {
               onTap: _onItemTapped,
             ),
           );
+          }
+
+          else {
+            return Scaffold(
+            backgroundColor: Colors.green[50],
+            appBar: AppBar(
+              leading: IconButton(
+                  icon: const Icon(
+                    Icons.logout,
+                    color: Colors.grey,
+                  ),
+                  onPressed: () {
+                    _signOut();
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const LoginWidget()));
+                  }),
+              title: const Icon(Icons.pets_rounded),
+              backgroundColor: Colors.green[100],
+            ),
+            body: Center(
+              child: _widgetOptions.elementAt(_selectedIndex),
+            ),
+            bottomNavigationBar: BottomNavigationBar(
+              items: <BottomNavigationBarItem>[
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.pets),
+                  label: 'Pets',
+                  backgroundColor: Colors.grey[350],
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.newspaper),
+                  label: 'News',
+                  backgroundColor: Colors.grey[350],
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.person),
+                  label: 'Profile',
+                  backgroundColor: Colors.grey[350],
+                ),
+              ],
+              currentIndex: _selectedIndex,
+              selectedItemColor: Colors.black,
+              onTap: _onItemTapped,
+            ),
+          ); 
+          }
         }
       }
     );
