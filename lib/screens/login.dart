@@ -15,7 +15,7 @@ class _LoginWidgetState extends State<LoginWidget> {
   final formKey = GlobalKey<FormState>();
   final TextEditingController _emailField = TextEditingController();
   final TextEditingController _passwordField = TextEditingController();
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(backgroundColor: Colors.green[50],
