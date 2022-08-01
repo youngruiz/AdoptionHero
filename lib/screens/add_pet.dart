@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:adoption_hero/main.dart';
@@ -77,6 +78,7 @@ class _AddPetTabBodyWidgetState extends State<AddPetTabBodyWidget> {
 
    void uploadData() async {
     final url = await getImage();
+    String userEmail = FirebaseAuth.instance.currentUser!.email.toString().trim();
     FirebaseFirestore.instance
       .collection('pets')
       .add({
@@ -86,7 +88,7 @@ class _AddPetTabBodyWidgetState extends State<AddPetTabBodyWidget> {
         'dispositions': dispositions,
         'availability': availability,
         'description': description,
-        'userId': "userID1234567",
+        'owner': userEmail,
         'imgUrl': url,
         'liked': 0,
         'dateCreated': DateFormat.yMMMMEEEEd().format(DateTime.now()).toString(),
