@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:adoption_hero/main.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+import 'navigator_scaffold.dart';
 
 
 class AddPetTabBodyWidget extends StatefulWidget {
