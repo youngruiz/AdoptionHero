@@ -1,8 +1,8 @@
+import 'package:adoption_hero/screens/login_register/register.dart';
 import 'package:adoption_hero/screens/navigator_scaffold.dart';
 import 'package:adoption_hero/widgets/error_alert.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:adoption_hero/screens/register.dart';
 
 class LoginWidget extends StatefulWidget {
   const LoginWidget({Key? key}) : super(key: key);
@@ -19,7 +19,8 @@ class _LoginWidgetState extends State<LoginWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(backgroundColor: Colors.green[50],
+    return Scaffold(
+      backgroundColor: Colors.green[50],
       appBar: AppBar(
         title: const Icon(Icons.pets_rounded),
         backgroundColor: Colors.green[100],

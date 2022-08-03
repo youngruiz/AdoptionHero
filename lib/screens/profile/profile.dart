@@ -1,9 +1,13 @@
+import 'package:adoption_hero/models/userProfileDTO.dart';
+import 'package:adoption_hero/screens/profile/edit_profile.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class ProfileTabBodyWidget extends StatelessWidget {
   const ProfileTabBodyWidget({Key? key}) : super(key: key);
+
+  static const routeName = 'profile';
 
   @override
   Widget build(BuildContext context) {
@@ -71,15 +75,40 @@ class ProfileTabBodyWidget extends StatelessWidget {
                           width: double.infinity, 
                           child: Text("User Since: ${profile['dateCreated']}"))
                       ),
-      
-                      ],
-                  ),)), 
+
+                      editProfileButton(context, profile),
+                    ],
+                  ),
+                )
+              ), 
           );
         }
       }
     );
   } 
 }
+
+ Widget editProfileButton(BuildContext context, profile){
+    var userProfile = UserProfileDTO(
+      name: profile['name'],
+      email: profile['email'],
+      userType: profile['userType'],
+      docId: profile.id
+    );
+    return ElevatedButton(
+      onPressed: () {
+        Navigator.push(
+          context, 
+          MaterialPageRoute(
+            builder: (context) => EditProfileWidget(
+              userProfile: userProfile
+            )
+          )
+        );
+      },
+      child: const Text('Edit profile'),
+    );
+  }
 
 Future<QuerySnapshot> getUser() async {
   String userEmail = FirebaseAuth.instance.currentUser!.email.toString().trim();
