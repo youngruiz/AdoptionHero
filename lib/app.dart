@@ -13,14 +13,15 @@ class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
     static final routes = {
-        // '/': (context) => const LoginWidget(),
-        // '/register': (context) => const RegisterWidget(),
-        News.routeName: (context) => const News(),
-        NewsArticle.routeName: (context) => NewsArticle(),
-        Pets.routeName: (context) => const Pets(),
-        PetView.routeName: (context) => PetView(),
-        ProfileTabBodyWidget.routeName: (context) => ProfileTabBodyWidget(),
-        };
+      // '/': (context) => const LoginWidget(),
+      // '/register': (context) => const RegisterWidget(),
+      News.routeName: (context) => const News(),
+      NewsArticle.routeName: (context) => NewsArticle(),
+      Pets.routeName: (context) => const Pets(),
+      PetView.routeName: (context) => PetView(),
+      ProfileTabBodyWidget.routeName: (context) => const ProfileTabBodyWidget(),
+      NavigatorScaffold.routeName: (context) => const NavigatorScaffold(),
+    };
 
   @override
   Widget build(BuildContext context){

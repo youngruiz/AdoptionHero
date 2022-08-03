@@ -1,5 +1,4 @@
 import 'package:adoption_hero/screens/add_pet.dart';
-import 'package:adoption_hero/screens/add_pet_nonadmin.dart';
 import 'package:adoption_hero/screens/login.dart';
 import 'package:adoption_hero/screens/news.dart';
 import 'package:adoption_hero/screens/pets.dart';
@@ -14,6 +13,9 @@ import '../app.dart';
 class NavigatorScaffold extends StatefulWidget {
   const NavigatorScaffold({Key? key}) : super(key: key);
 
+  static const routeName = 'home';
+
+
   @override
   State<NavigatorScaffold> createState() => _NavigatorScaffoldState();
 }
@@ -22,6 +24,8 @@ class _NavigatorScaffoldState extends State<NavigatorScaffold> {
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+
+  
   static const List<Widget> _widgetOptionsAdmin = <Widget>[
     Pets(),
     News(),

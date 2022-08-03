@@ -76,14 +76,14 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
     return Padding(
       padding: const EdgeInsets.all(5),
       child: TextFormField(
+        initialValue: widget.userProfile.name,
         autofocus: true,
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
           labelText: 'Edit Name',
-          hintText: widget.userProfile.name
         ),
         validator: (value) {
           if(value!.isEmpty){
-            return 'Please enter a new name';
+            return 'Please enter a name';
           } else {
             return null;
           }
@@ -99,13 +99,14 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
     return Padding(
       padding: const EdgeInsets.all(5),
       child: TextFormField(
+        initialValue: widget.userProfile.email,
         decoration: InputDecoration(
           labelText: 'Edit Email',
           hintText: widget.userProfile.email
         ),
         validator: (value) {
-          if(value!.isEmpty){
-            return null;
+          if(value!.isEmpty || !value.contains('@')){
+            return 'Please enter a valid email address';
           } else {
             return null;
           }
@@ -123,7 +124,9 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
         if(formKey.currentState!.validate()){
           formKey.currentState!.save();
           uploadData();
-          Navigator.pop(context);
+          Navigator.popAndPushNamed(
+            context, 'home'
+          );
         }
       }, 
       child: const Text('Upload'),
