@@ -51,6 +51,9 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
           
                     editNameField(),
                     editEmailField(),
+                    Container(
+                      height: 10,
+                    ),
                     accountTypeDropdown(),
                     uploadButton(context),
                   ],

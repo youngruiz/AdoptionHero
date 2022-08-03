@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:adoption_hero/main.dart';
 import 'pet_view.dart';
 
 class Pets extends StatelessWidget {
@@ -17,17 +17,24 @@ class Pets extends StatelessWidget {
         .snapshots(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot){
         if(snapshot.hasData && snapshot.data!.docs.isNotEmpty){
+
+          //Show pets that are available or owned by the current user
+          var availablePets = snapshot.data!.docs.where(
+            (i) => 
+              i['availability'].toString() != 'Not Available' 
+              || i['owner'].toString().trim() == FirebaseAuth.instance.currentUser!.email.toString().trim()
+          ).toList();
+
           return GridView.builder(
-            padding: EdgeInsets.only(top: 5),
+            padding: const EdgeInsets.only(top: 5),
             gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                       maxCrossAxisExtent: 200,
                       crossAxisSpacing: 10.0,
                       mainAxisSpacing: 10.0
                     ),
-            itemCount: snapshot.data!.docs.length, 
+            itemCount: availablePets.length, 
             itemBuilder: (context, index) {
-
-              var post = snapshot.data!.docs[index];
+              var post = availablePets[index];
               var petData = new Map();
               petData['name'] = post['name'];
               petData['availability'] = post['availability'];
@@ -45,8 +52,8 @@ class Pets extends StatelessWidget {
                       Container(
                         alignment: Alignment.bottomLeft, 
                         child: Padding(
-                          padding: EdgeInsets.all(10), 
-                          child: Text(petData['name'], style: TextStyle(color: Colors.white,fontSize: 24, fontFamily: 'Inter-Bold')))),
+                          padding: const EdgeInsets.all(10), 
+                          child: Text(petData['name'], style: const TextStyle(color: Colors.white,fontSize: 24, fontFamily: 'Inter-Bold')))),
                     ],),
                   
                   
