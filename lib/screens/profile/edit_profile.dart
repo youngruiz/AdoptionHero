@@ -1,5 +1,4 @@
 import 'package:adoption_hero/models/userProfileDTO.dart';
-import 'package:adoption_hero/screens/profile.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +17,8 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
   
   String? name;
   String? email;
+  String? userType;
+  late String dropdownValue = widget.userProfile.userType;
   final formKey = GlobalKey<FormState>();
 
   @override
@@ -49,19 +50,8 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                     ),
           
                     editNameField(),
-          
                     editEmailField(),
-          
-                    Padding(
-                      padding: EdgeInsets.all(10), 
-                      child: Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.blueAccent)
-                        ),
-                        width: double.infinity, 
-                        child: Text("USER TYPE: ${widget.userProfile.userType}"))
-                    ),
-      
+                    accountTypeDropdown(),
                     uploadButton(context),
                   ],
                 ),
@@ -118,6 +108,33 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
     );
   }
 
+  Widget accountTypeDropdown() {
+    return DropdownButtonFormField (
+      style: const TextStyle(color: Colors.black),
+      value: widget.userProfile.userType,
+      icon: const Icon(Icons.arrow_downward),
+      decoration: const InputDecoration(
+          labelText: "Account Type",
+          border: OutlineInputBorder()
+      ),
+      items: <String>["Admin", "User"]
+      .map<DropdownMenuItem<String>>((String value) {
+        return DropdownMenuItem<String>(
+          value: value,
+          child: Text(value.toString())
+        );
+      }).toList(), 
+      onChanged: (value) {
+        setState((){
+          dropdownValue = value.toString();
+        });
+      },
+      onSaved: (value) {
+        userType = value.toString();
+      },
+    );
+  }
+
   Widget uploadButton(BuildContext context){
     return ElevatedButton(
       onPressed: () {
@@ -129,7 +146,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
           );
         }
       }, 
-      child: const Text('Upload'),
+      child: const Text('Save changes'),
     );
   }
 
@@ -139,7 +156,8 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
       .doc(widget.userProfile.docId)
       .update({
         'name': name,
-        'email': email
+        'email': email,
+        'userType': userType
       }
     );
   }

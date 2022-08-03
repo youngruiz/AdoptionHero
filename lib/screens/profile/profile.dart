@@ -1,5 +1,5 @@
 import 'package:adoption_hero/models/userProfileDTO.dart';
-import 'package:adoption_hero/screens/edit_profile.dart';
+import 'package:adoption_hero/screens/profile/edit_profile.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

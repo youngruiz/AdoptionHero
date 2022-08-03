@@ -1,8 +1,8 @@
-import 'package:adoption_hero/screens/add_pet.dart';
-import 'package:adoption_hero/screens/login.dart';
-import 'package:adoption_hero/screens/news.dart';
-import 'package:adoption_hero/screens/pets.dart';
-import 'package:adoption_hero/screens/profile.dart';
+import 'package:adoption_hero/screens/login_register/login.dart';
+import 'package:adoption_hero/screens/news/news.dart';
+import 'package:adoption_hero/screens/pets/add_pet.dart';
+import 'package:adoption_hero/screens/pets/pets.dart';
+import 'package:adoption_hero/screens/profile/profile.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
