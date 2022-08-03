@@ -1,10 +1,10 @@
-import 'package:adoption_hero/screens/login.dart';
+import 'package:adoption_hero/screens/login_register/login.dart';
 import 'package:adoption_hero/screens/navigator_scaffold.dart';
-import 'package:adoption_hero/screens/news.dart';
-import 'package:adoption_hero/screens/news_article.dart';
-import 'package:adoption_hero/screens/pet_view.dart';
-import 'package:adoption_hero/screens/pets.dart';
-import 'package:adoption_hero/screens/profile.dart';
+import 'package:adoption_hero/screens/news/news.dart';
+import 'package:adoption_hero/screens/news/news_article.dart';
+import 'package:adoption_hero/screens/pets/pet_view.dart';
+import 'package:adoption_hero/screens/pets/pets.dart';
+import 'package:adoption_hero/screens/profile/profile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
