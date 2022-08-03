@@ -19,7 +19,8 @@ class _LoginWidgetState extends State<LoginWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(backgroundColor: Colors.green[50],
+    return Scaffold(
+      backgroundColor: Colors.green[50],
       appBar: AppBar(
         title: const Icon(Icons.pets_rounded),
         backgroundColor: Colors.green[100],

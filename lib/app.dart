@@ -4,6 +4,7 @@ import 'package:adoption_hero/screens/news.dart';
 import 'package:adoption_hero/screens/news_article.dart';
 import 'package:adoption_hero/screens/pet_view.dart';
 import 'package:adoption_hero/screens/pets.dart';
+import 'package:adoption_hero/screens/profile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,7 @@ class MyApp extends StatelessWidget {
         NewsArticle.routeName: (context) => NewsArticle(),
         Pets.routeName: (context) => const Pets(),
         PetView.routeName: (context) => PetView(),
+        ProfileTabBodyWidget.routeName: (context) => ProfileTabBodyWidget(),
         };
 
   @override
