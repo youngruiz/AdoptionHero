@@ -46,7 +46,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                     padding: EdgeInsets.all(10), 
                     child: Container(
                       height: 350, width: double.infinity, 
-                      child: Image.asset('assets/images/clown.jpg'))
+                      child: Image.asset('assets/images/blank_user.png'))
                     ),
           
                     editNameField(),

@@ -33,47 +33,35 @@ class ProfileTabBodyWidget extends StatelessWidget {
                       padding: EdgeInsets.all(10), 
                       child: Container(
                         height: 350, width: double.infinity, 
-                        child: Image.asset('assets/images/clown.jpg'))
+                        child: Image.asset('assets/images/blank_user.png'))
                       ),
       
                       Padding(
                         padding: EdgeInsets.all(10), 
                         child: Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.blueAccent)
-                          ),
                           width: double.infinity, 
-                          child: Text("NAME: ${profile['name']}"))
+                          child: Text("NAME:               ${profile['name']}", style: TextStyle(fontSize: 16, fontFamily: 'Tinos')))
                       ),
       
                       Padding(
                         padding: EdgeInsets.all(10), 
                         child: Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.blueAccent)
-                          ),
                           width: double.infinity, 
-                          child: Text("EMAIL: ${profile['email']}"))
+                          child: Text("EMAIL:              ${profile['email']}", style: TextStyle(fontSize: 16, fontFamily: 'Tinos')))
                       ),
 
                       Padding(
                         padding: EdgeInsets.all(10), 
                         child: Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.blueAccent)
-                          ),
                           width: double.infinity, 
-                          child: Text("USER TYPE: ${profile['userType']}"))
+                          child: Text("USER TYPE:      ${profile['userType']}", style: TextStyle(fontSize: 16, fontFamily: 'Tinos')))
                       ),
 
                       Padding(
                         padding: EdgeInsets.all(10), 
                         child: Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.blueAccent)
-                          ),
                           width: double.infinity, 
-                          child: Text("User Since: ${profile['dateCreated']}"))
+                          child: Text("USER SINCE:     ${profile['dateCreated']}", style: TextStyle(fontSize: 16, fontFamily: 'Tinos')))
                       ),
 
                       editProfileButton(context, profile),
@@ -95,7 +83,7 @@ class ProfileTabBodyWidget extends StatelessWidget {
       userType: profile['userType'],
       docId: profile.id
     );
-    return ElevatedButton(
+    return Padding(padding: EdgeInsets.only(top: 10), child: ElevatedButton(
       onPressed: () {
         Navigator.push(
           context, 
@@ -107,6 +95,7 @@ class ProfileTabBodyWidget extends StatelessWidget {
         );
       },
       child: const Text('Edit profile'),
+    )
     );
   }
 
