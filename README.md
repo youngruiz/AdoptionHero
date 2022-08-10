@@ -20,5 +20,5 @@ samples, guidance on mobile development, and a full API reference.
 
 ## Build/Run
 
-Be sure to run 'flutter pub get' before exececuting the first time to add the correct packages to project.
+Be sure to run 'flutter pub get' before executing the first time to add the correct packages to project.
 
