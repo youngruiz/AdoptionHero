@@ -2,7 +2,7 @@
 
 Adoption Hero is a "dating" app that matches shelter animals up with prospective owners.
 
-![alt text](https://github.com/youngruiz/adoption_hero/main/assets/images/120.png?raw=true)
+![alt text](/assets/images/120.png?raw=true)
 
 ## Getting Started
 
