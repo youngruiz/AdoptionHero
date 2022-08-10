@@ -1,6 +1,6 @@
 # Adoption Hero
 
-Adoption Hero is a "dating" app for iOS that matches shelter animals up with prospective owners.
+Adoption Hero is mobile "dating" app that matches shelter animals up with prospective owners. 
 
 ![alt text](/assets/images/120.png?raw=true)
 
@@ -16,3 +16,9 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+
+## Build/Run
+
+Be sure to run 'flutter pub get' before exececuting the first time to add the correct packages to project.
+
