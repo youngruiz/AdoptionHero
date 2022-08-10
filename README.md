@@ -1,6 +1,6 @@
 # Adoption Hero
 
-Adoption Hero is a "dating" app that matches shelter animals up with prospective owners.
+Adoption Hero is a "dating" app for iOS that matches shelter animals up with prospective owners.
 
 ![alt text](/assets/images/120.png?raw=true)
 
