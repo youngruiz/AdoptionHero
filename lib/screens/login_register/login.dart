@@ -19,7 +19,11 @@ class _LoginWidgetState extends State<LoginWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child:
+      Scaffold(
       backgroundColor: Colors.green[50],
       appBar: AppBar(
         title: const Icon(Icons.pets_rounded),
@@ -87,7 +91,7 @@ class _LoginWidgetState extends State<LoginWidget> {
               ],
             ),
           )),
-    );
+    ));
   }
 
   Future<bool> signIn() async {

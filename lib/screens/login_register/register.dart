@@ -28,7 +28,10 @@ class _RegisterWidgetState extends State<RegisterWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(backgroundColor: Colors.green[50],
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child:
+    Scaffold(backgroundColor: Colors.green[50],
       appBar: AppBar(
         title: const Icon(Icons.pets_rounded),
         backgroundColor: Colors.green[100],
@@ -87,7 +90,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
           )
         ),
       )
-    );
+    ));
   }
 
   Future<bool> register() async {

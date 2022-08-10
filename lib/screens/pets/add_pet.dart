@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:adoption_hero/main.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-
+import 'package:adoption_hero/screens/navigator_scaffold.dart';
 
 class AddPetTabBodyWidget extends StatefulWidget {
   const AddPetTabBodyWidget({Key? key}) : super(key: key);
@@ -43,26 +43,30 @@ class _AddPetTabBodyWidgetState extends State<AddPetTabBodyWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(child: Padding(
-      padding: const EdgeInsets.all(10),
-      child: 
-      Form(
-        key: formKey,
-        child: Column(
-          children: [
-      
-            petNameField(),
-            petTypeField(),
-            petBreedField(),
-            petAvailabilityField(),
-            petDescriptionField(),
-            petNewsItemField(),
-            petDispositionField2(),
-            selectImageButton()
-          ]),
-      )
-      )
-    );
+
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child:
+        SingleChildScrollView(child: Padding(
+        padding: const EdgeInsets.all(10),
+        child: 
+        Form(
+          key: formKey,
+          child: Column(
+            children: [
+        
+              petNameField(),
+              petTypeField(),
+              petBreedField(),
+              petAvailabilityField(),
+              petDescriptionField(),
+              petNewsItemField(),
+              petDispositionField2(),
+              selectImageButton()
+            ]),
+        )
+        )
+      ));
   }
 
     Future getImage() async {
@@ -76,7 +80,7 @@ class _AddPetTabBodyWidgetState extends State<AddPetTabBodyWidget> {
       return url;
     }
 
-   void uploadData() async {
+    uploadData() async {
     final url = await getImage();
     String userEmail = FirebaseAuth.instance.currentUser!.email.toString().trim();
     FirebaseFirestore.instance
